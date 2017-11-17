@@ -1,0 +1,77 @@
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+void findSquare(Mat image) {
+	int find = 0;
+	for (int y = 0; y < image.size().height; y++) {
+		for (int x = 0; x < image.size().width && find == 0; x++) {
+			Vec3b intensity = image.at<Vec3b>(y, x);
+			uchar blue = intensity.val[0];
+			uchar green = intensity.val[1];
+			uchar red = intensity.val[2];
+			if (red == 0 && green == 0 && blue == 0) {
+				if ((x != 0 && image.at<Vec3b>(y, x - 1).val[0] != 0) || x == 0) {
+					int N = 0;
+					int BG = 1;
+					int NB = 0;
+					int BD = 1;
+					for (int i = x; i < (image.size().width); i++) {
+						if (image.at<Vec3b>(y, i).val[0] == 0) {
+							N++;
+						}
+						else {
+							break;
+						}
+					}
+					for (int b = y; b < image.size().height && image.at<Vec3b>(b, x).val[0] == 0; b++)
+					{
+						BG++;
+					}
+					if (N > 10) {
+						for (int b = y; b < image.size().height && image.at<Vec3b>(b, x + N - 1).val[0] == 0; b++)
+						{
+							BD++;
+						}
+						for (int b = x; b < image.size().width && (int)image.at<Vec3b>(y + BG - 2, b).val[0] != 255; b++)
+						{
+							NB++;
+						}
+						if ((BD == BG && N == NB) || (BD + 1 == BG && N == NB) || (BD == BG && N == NB - 1))
+						{
+
+							std::cout << "square !!"  /*<< N <<  ", " << NB << ", "  << BD << ", "  << BG << ", "  */ << std::endl;
+							find = 1;
+						}
+					}
+				}
+
+			}
+		}
+	}
+}
+int main(int argc, char** argv)
+{
+	if (argc != 2)
+	{
+		cout << " Usage: display_image ImageToLoadAndDisplay" << endl;
+		return -1;
+	}
+	Mat image;
+	image = imread(argv[1], IMREAD_COLOR); // Read the file
+	if (image.empty()) // Check for invalid input
+	{
+		cout << "Could not open or find the image" << std::endl;
+		return -1;
+	}
+	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
+	imshow("Display window", image); // Show our image inside it.
+	findSquare(image);
+	waitKey(0); // Wait for a keystroke in the window
+
+	return 0;
+}
