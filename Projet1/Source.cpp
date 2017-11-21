@@ -20,9 +20,36 @@ int main(int argc, char** argv)
 		cout << "Could not open or find the image" << std::endl;
 		return -1;
 	}
+
+	//todo
+	stretchPixels(image);
+	distortColors(image);
+	addNoise(image);
+	addTimeStamp(image);
+
 	namedWindow("Display window", WINDOW_AUTOSIZE); // Create a window for display.
 	imshow("Display window", image); // Show our image inside it.
 	waitKey(0); // Wait for a keystroke in the window
 
 	return 0;
+}
+
+void stretchPixels(Mat image)
+{
+
+}
+
+void distortColors(Mat image)
+{
+
+}
+
+void addNoise(Mat image)
+{
+
+}
+
+void addTimeStamp(Mat image)
+{
+
 }
