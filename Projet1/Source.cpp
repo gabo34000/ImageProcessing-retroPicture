@@ -2,9 +2,66 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace cv;
 using namespace std;
+
+void stretchPixels(Mat image)
+{
+
+}
+
+void distortColors(Mat image)
+{
+	srand((unsigned)time(NULL));
+
+	int width = image.size().width;
+	int height = image.size().height;
+	int rx = (rand() % 10) - 5;
+	int ry = (rand() % 10) - 5;
+	int gx = (rand() % 10) - 5;
+	int gy = (rand() % 10) - 5;
+	int bx = (rand() % 10) - 5;
+	int by = (rand() % 10) - 5;
+	Mat buffer = image.clone();
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			if ((y + by) >= 0 && (x + bx) >= 0 &&
+				(y + by) < height && (x + bx) < width)
+				image.at<cv::Vec3b>(y, x)[0] = buffer.at<cv::Vec3b>(y + by, x + bx)[0];
+			else
+				image.at<cv::Vec3b>(y, x)[0] = 0;
+			
+			if ((y + gy) >= 0 && (x + gx) >= 0 &&
+				(y + gy) < height && (x + gx) < width)
+				image.at<cv::Vec3b>(y, x)[1] = buffer.at<cv::Vec3b>(y + gy, x + gx)[1];
+			else
+				image.at<cv::Vec3b>(y, x)[1] = 0;
+
+			if ((y + ry) >= 0 && (x + rx) >= 0 &&
+				(y + ry) < height && (x + rx) < width)
+				image.at<cv::Vec3b>(y, x)[2] = buffer.at<cv::Vec3b>(y + ry, x + rx)[2];
+			else
+				image.at<cv::Vec3b>(y, x)[2] = 0;
+		}
+	}
+
+}
+
+void addNoise(Mat image)
+{
+
+}
+
+void addTimeStamp(Mat image)
+{
+
+}
 
 int main(int argc, char** argv)
 {
@@ -13,6 +70,7 @@ int main(int argc, char** argv)
 		cout << " Usage: display_image ImageToLoadAndDisplay" << endl;
 		return -1;
 	}
+
 	Mat image;
 	image = imread(argv[1], IMREAD_COLOR); // Read the file
 	if (image.empty()) // Check for invalid input
@@ -34,22 +92,3 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-void stretchPixels(Mat image)
-{
-
-}
-
-void distortColors(Mat image)
-{
-
-}
-
-void addNoise(Mat image)
-{
-
-}
-
-void addTimeStamp(Mat image)
-{
-
-}
