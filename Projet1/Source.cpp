@@ -34,23 +34,16 @@ void distortColors(Mat image)
 			if ((y + by) >= 0 && (x + bx) >= 0 &&
 				(y + by) < height && (x + bx) < width)
 				image.at<cv::Vec3b>(y, x)[0] = buffer.at<cv::Vec3b>(y + by, x + bx)[0];
-			else
-				image.at<cv::Vec3b>(y, x)[0] = 0;
 			
 			if ((y + gy) >= 0 && (x + gx) >= 0 &&
 				(y + gy) < height && (x + gx) < width)
 				image.at<cv::Vec3b>(y, x)[1] = buffer.at<cv::Vec3b>(y + gy, x + gx)[1];
-			else
-				image.at<cv::Vec3b>(y, x)[1] = 0;
 
 			if ((y + ry) >= 0 && (x + rx) >= 0 &&
 				(y + ry) < height && (x + rx) < width)
 				image.at<cv::Vec3b>(y, x)[2] = buffer.at<cv::Vec3b>(y + ry, x + rx)[2];
-			else
-				image.at<cv::Vec3b>(y, x)[2] = 0;
 		}
 	}
-
 }
 
 void addNoise(Mat image)
