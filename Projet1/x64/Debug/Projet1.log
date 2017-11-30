@@ -1,4 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Projet1.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
   Source.cpp
-  Projet1.vcxproj -> C:\Users\gabi\Desktop\epitech\chung ang\ImageProcessing-TeamProject\x64\Debug\TeamProject01.exe
-  Projet1.vcxproj -> C:\Users\gabi\Desktop\epitech\chung ang\ImageProcessing-TeamProject\x64\Debug\TeamProject01.pdb (Partial PDB)
+  Projet1.vcxproj -> C:\Users\gabi\Desktop\epitech\ImageProcessing-retroPicture\x64\Debug\TeamProject01.exe
+  Projet1.vcxproj -> C:\Users\gabi\Desktop\epitech\ImageProcessing-retroPicture\x64\Debug\TeamProject01.pdb (Partial PDB)
